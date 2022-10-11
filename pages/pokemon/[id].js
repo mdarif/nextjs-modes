@@ -5,6 +5,62 @@ import Link from 'next/link';
 import styles from '../../styles/Details.module.css';
 
 /**
+ * getStaticPaths
+ *
+ * If a page has Dynamic Routes and uses getStaticProps, it needs to define a list of paths
+ * to be statically generated.
+ *
+ * When you export a function called getStaticPaths (Static Site Generation) from a page
+ * that uses dynamic routes, Next.js will statically pre-render all the paths specified
+ * by getStaticPaths.
+ */
+
+export async function getStaticPaths() {
+  const response = await fetch(
+    'https://almarfa.in/pokemon/pokemon-main/index.json'
+  );
+
+  const pokemon = await response.json();
+
+  return {
+    paths: pokemon.map((pokemon) => ({
+      params: { id: pokemon.id.toString() },
+    })),
+    fallback: false,
+  };
+}
+
+/**
+ * getStaticProps
+ *
+ * If you export a function called getStaticProps (Static Site Generation) from a page,
+ * Next.js will pre-render this page at build time using the props returned by
+ * getStaticProps.
+ *
+ * When should I use getStaticProps?
+ *
+ * The data required to render the page is available at build time ahead of a user’s request
+ *
+ * The data comes from a 'headless CMS'
+ *
+ * The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML
+ * and JSON files, both of which can be cached by a CDN for performance
+ *
+ */
+
+export async function getStaticProps({ params }) {
+  const resp = await fetch(
+    `https://almarfa.in/pokemon/pokemon-main/pokemon/${params.id}.json`
+  );
+
+  return {
+    props: {
+      pokemon: await resp.json(),
+    },
+  };
+}
+
+/**
  * getServerSideProps
  *
  * If you export a function called getServerSideProps (Server-Side Rendering)
@@ -16,7 +72,7 @@ import styles from '../../styles/Details.module.css';
  * getServerSideProps returns JSON which will be used to render the page.
  */
 
-export async function getServerSideProps({ params }) {
+/* export async function getServerSideProps({ params }) {
   const resp = await fetch(
     `https://almarfa.in/pokemon/pokemon-main/pokemon/${params.id}.json`
   );
@@ -26,7 +82,7 @@ export async function getServerSideProps({ params }) {
       pokemon: await resp.json(),
     },
   };
-}
+} */
 
 export default function Details({ pokemon }) {
   /*   const {

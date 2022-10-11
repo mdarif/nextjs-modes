@@ -4,6 +4,36 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 /**
+ * getStaticProps
+ *
+ * If you export a function called getStaticProps (Static Site Generation) from a page,
+ * Next.js will pre-render this page at build time using the props returned by
+ * getStaticProps.
+ *
+ * When should I use getStaticProps?
+ *
+ * The data required to render the page is available at build time ahead of a user’s request
+ *
+ * The data comes from a 'headless CMS'
+ *
+ * The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML
+ * and JSON files, both of which can be cached by a CDN for performance
+ *
+ */
+
+export async function getStaticProps() {
+  const response = await fetch(
+    'https://almarfa.in/pokemon/pokemon-main/index.json'
+  );
+
+  return {
+    props: {
+      pokemon: await response.json(),
+    },
+  };
+}
+
+/**
  * getServerSideProps
  *
  * If you export a function called getServerSideProps (Server-Side Rendering)
@@ -15,7 +45,7 @@ import styles from '../styles/Home.module.css';
  * getServerSideProps returns JSON which will be used to render the page.
  */
 
-export async function getServerSideProps() {
+/* export async function getServerSideProps() {
   const response = await fetch(
     'https://almarfa.in/pokemon/pokemon-main/index.json'
   );
@@ -25,7 +55,7 @@ export async function getServerSideProps() {
       pokemon: await response.json(),
     },
   };
-}
+} */
 
 export default function Home({ pokemon }) {
   /*   const [pokemon, setPokemon] = useState([]);
