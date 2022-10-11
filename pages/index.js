@@ -1,10 +1,34 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
-  const [pokemon, setPokemon] = useState([]);
+/**
+ * getServerSideProps
+ *
+ * If you export a function called getServerSideProps (Server-Side Rendering)
+ * from a page, Next.js will pre-render this page on each request using the
+ * data returned by getServerSideProps.
+ *
+ * 'getServerSideProps' only runs on server-side and never runs on the browser.
+ *
+ * getServerSideProps returns JSON which will be used to render the page.
+ */
+
+export async function getServerSideProps() {
+  const response = await fetch(
+    'https://almarfa.in/pokemon/pokemon-main/index.json'
+  );
+
+  return {
+    props: {
+      pokemon: await response.json(),
+    },
+  };
+}
+
+export default function Home({ pokemon }) {
+  /*   const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
     async function getPokemon() {
@@ -15,7 +39,7 @@ export default function Home() {
     }
     getPokemon();
   }, []);
-
+ */
   return (
     <div className={styles.container}>
       <Head>
@@ -23,7 +47,6 @@ export default function Home() {
       </Head>
       <h2>Pokemon List</h2>
       <div className={styles.grid}>
-        {/* <div>{JSON.stringify(pokemon)}</div> */}
         {pokemon.map((pokemon) => (
           <div className={styles.card} key={pokemon.id}>
             <Link href={`/pokemon/${pokemon.id}`}>

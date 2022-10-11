@@ -1,11 +1,35 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+// import { useRouter } from 'next/router';
+// import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Details.module.css';
 
-export default function Details() {
-  const {
+/**
+ * getServerSideProps
+ *
+ * If you export a function called getServerSideProps (Server-Side Rendering)
+ * from a page, Next.js will pre-render this page on each request using the
+ * data returned by getServerSideProps.
+ *
+ * 'getServerSideProps' only runs on server-side and never runs on the browser.
+ *
+ * getServerSideProps returns JSON which will be used to render the page.
+ */
+
+export async function getServerSideProps({ params }) {
+  const resp = await fetch(
+    `https://almarfa.in/pokemon/pokemon-main/pokemon/${params.id}.json`
+  );
+
+  return {
+    props: {
+      pokemon: await resp.json(),
+    },
+  };
+}
+
+export default function Details({ pokemon }) {
+  /*   const {
     query: { id },
   } = useRouter();
   const [pokemon, setPokemon] = useState(null);
@@ -22,7 +46,7 @@ export default function Details() {
     if (id) getPokemon();
   }, [id]);
 
-  if (!pokemon) return null;
+  if (!pokemon) return null; */
 
   return (
     <div>
