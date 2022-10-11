@@ -57,6 +57,13 @@ export async function getStaticProps({ params }) {
     props: {
       pokemon: await resp.json(),
     },
+    /**
+     * revalidate
+     *
+     * The revalidate property is the amount in seconds after which a page re-generation
+     * can occur (defaults to false or no revalidation).
+     */
+    revalidate: 30,
   };
 }
 
