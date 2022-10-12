@@ -130,7 +130,7 @@ export default function Details({ pokemon }) {
             alt={pokemon.name.english}
             width={400}
             height={400}
-            priority={true}
+            priority={true} // When true, the image will be considered high priority and preload. Lazy loading is automatically disabled for images using priority.
           />
         </div>
         <div>
