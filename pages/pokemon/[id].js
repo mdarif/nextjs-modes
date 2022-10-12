@@ -130,6 +130,7 @@ export default function Details({ pokemon }) {
             alt={pokemon.name.english}
             width={400}
             height={400}
+            priority={true}
           />
         </div>
         <div>
