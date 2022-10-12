@@ -96,6 +96,7 @@ export default function Home({ pokemon }) {
                   width={200}
                   height={200}
                   // priority={true} // When true, the image will be considered high priority and preload. Lazy loading is automatically disabled for images using priority.
+                  priority={pokemon.id === 20}
                 />
                 <h3>{pokemon.name}</h3>
               </a>
