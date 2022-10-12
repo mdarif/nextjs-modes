@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/future/image';
 // import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
@@ -70,6 +71,13 @@ export default function Home({ pokemon }) {
     getPokemon();
   }, []);
  */
+
+  // const myLoader = ({ src, width, quality }) => {
+  //   return `https://almarfa.in/pokemon/pokemon-main/${src}?w=${width}&q=${
+  //     quality || 75
+  //   }`;
+  // };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -81,9 +89,12 @@ export default function Home({ pokemon }) {
           <div className={styles.card} key={pokemon.id}>
             <Link href={`/pokemon/${pokemon.id}`}>
               <a>
-                <img
+                <Image
+                  // loader={myLoader}
                   src={`https://almarfa.in/pokemon/pokemon-main/${pokemon.image}`}
                   alt={pokemon.name}
+                  width={200}
+                  height={200}
                 />
                 <h3>{pokemon.name}</h3>
               </a>

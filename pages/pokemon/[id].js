@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/future/image';
 import Link from 'next/link';
 // import { useRouter } from 'next/router';
 // import React, { useState, useEffect } from 'react';
@@ -123,10 +124,12 @@ export default function Details({ pokemon }) {
       </div>
       <div className={styles.layout}>
         <div>
-          <img
+          <Image
             className={styles.picture}
             src={`https://almarfa.in/pokemon/pokemon-main/${pokemon.image}`}
             alt={pokemon.name.english}
+            width={400}
+            height={400}
           />
         </div>
         <div>
