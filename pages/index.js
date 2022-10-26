@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/future/image';
-// import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
 /**
@@ -83,29 +82,46 @@ export default function Home({ pokemon }) {
       <Head>
         <title>Pokemon List</title>
       </Head>
-      <h2>Pokemon List</h2>
-      <div className={styles.grid}>
-        {pokemon.map((pokemon) => {
-          return (
-            <div className={styles.card} key={pokemon.id}>
-              <Link href={`/pokemon/${pokemon.id}`}>
-                <a>
-                  <Image
-                    // loader={myLoader}
-                    src={`https://almarfa.in/pokemon/pokemon-main/${pokemon.image}`}
-                    alt={pokemon.name}
-                    width={200}
-                    height={200}
-                    // priority={true} // When true, the image will be considered high priority and preload. Lazy loading is automatically disabled for images using priority.
-                    priority={pokemon.id <= 20}
-                  />
-                  <h3>{pokemon.name}</h3>
-                </a>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      <main>
+        <h1 className={styles.title}>
+          Welcome to Pokemon Modes with{' '}
+          <a href='https://nextjs.org'>Next.js 12!</a>
+        </h1>
+        <div className={styles.grid}>
+          {pokemon.map((pokemon) => {
+            return (
+              <div className={styles.card} key={pokemon.id}>
+                <Link href={`/pokemon/${pokemon.id}`}>
+                  <a>
+                    <Image
+                      // loader={myLoader}
+                      src={`https://almarfa.in/pokemon/pokemon-main/${pokemon.image}`}
+                      alt={pokemon.name}
+                      width={200}
+                      height={200}
+                      // priority={true} // When true, the image will be considered high priority and preload. Lazy loading is automatically disabled for images using priority.
+                      priority={pokemon.id <= 20}
+                    />
+                    <h3>{pokemon.name}</h3>
+                  </a>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </main>
+      <footer className={styles.footer}>
+        <a
+          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Powered by{' '}
+          <span className={styles.logo}>
+            <Image src='/vercel.svg' alt='Vercel Logo' width={72} height={16} />
+          </span>
+        </a>
+      </footer>
     </div>
   );
 }
