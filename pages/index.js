@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/future/image';
 import styles from '../styles/Home.module.css';
+import { useEffect, useState } from 'react';
 
 /**
  * getStaticProps
@@ -34,7 +35,7 @@ export async function getStaticProps() {
 }
 
 /**
- * getServerSideProps
+ * getServerSideProps (SSR)
  *
  * If you export a function called getServerSideProps (Server-Side Rendering)
  * from a page, Next.js will pre-render this page on each request using the
@@ -58,6 +59,9 @@ export async function getStaticProps() {
 } */
 
 export default function Home({ pokemon }) {
+  /**
+   * Client Side Rendering (CSR)
+   */
   /*   const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
@@ -70,7 +74,6 @@ export default function Home({ pokemon }) {
     getPokemon();
   }, []);
  */
-
   // const myLoader = ({ src, width, quality }) => {
   //   return `https://almarfa.in/pokemon/pokemon-main/${src}?w=${width}&q=${
   //     quality || 75

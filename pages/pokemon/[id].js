@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 }
 
 /**
- * getStaticProps
+ * getStaticProps (SSG)
  *
  * If you export a function called getStaticProps (Static Site Generation) from a page,
  * Next.js will pre-render this page at build time using the props returned by
@@ -69,7 +69,7 @@ export async function getStaticProps({ params }) {
 }
 
 /**
- * getServerSideProps
+ * getServerSideProps (SSR)
  *
  * If you export a function called getServerSideProps (Server-Side Rendering)
  * from a page, Next.js will pre-render this page on each request using the
@@ -93,7 +93,10 @@ export async function getStaticProps({ params }) {
 } */
 
 export default function Details({ pokemon }) {
-  /*   const {
+  /**
+   * Client Side Rendering (CSR)
+   */
+  /*     const {
     query: { id },
   } = useRouter();
   const [pokemon, setPokemon] = useState(null);
